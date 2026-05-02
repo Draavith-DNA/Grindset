@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GRINDSET Design System — Editorial Mono + Graffiti Energy
+   All colors HSL. Mobile-first. */
+
+@layer base {
+  :root {
+    /* Light — newsprint / paper */
+    --background: 40 18% 94%;
+    --foreground: 0 0% 8%;
+
+    --card: 40 20% 97%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 40 20% 97%;
+    --popover-foreground: 0 0% 8%;
+
+    --primary: 0 0% 8%;
+    --primary-foreground: 40 18% 94%;
+
+    --secondary: 40 14% 88%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 40 12% 86%;
+    --muted-foreground: 0 0% 35%;
+
+    --accent: 14 100% 55%;          /* spray-paint orange-red */
+    --accent-foreground: 40 20% 97%;
+
+    --highlight: 58 100% 55%;       /* graffiti yellow */
+    --highlight-foreground: 0 0% 8%;
+
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 40 20% 97%;
+
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 14 100% 55%;
+
+    --radius: 0.25rem;
+
+    --ink: 0 0% 8%;
+    --paper: 40 18% 94%;
+    --scribble: 0 0% 8%;
+
+    --sidebar-background: 40 18% 94%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 0 0% 8%;
+    --sidebar-primary-foreground: 40 18% 94%;
+    --sidebar-accent: 14 100% 55%;
+    --sidebar-accent-foreground: 40 20% 97%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 14 100% 55%;
+  }
+
+  .dark {
+    /* Dark — concrete wall */
+    --background: 0 0% 6%;
+    --foreground: 40 18% 94%;
+
+    --card: 0 0% 9%;
+    --card-foreground: 40 18% 94%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 40 18% 94%;
+
+    --primary: 40 18% 94%;
+    --primary-foreground: 0 0% 6%;
+
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 40 18% 94%;
+
+    --muted: 0 0% 14%;
+    --muted-foreground: 40 8% 65%;
+
+    --accent: 14 100% 58%;
+    --accent-foreground: 0 0% 6%;
+
+    --highlight: 58 100% 58%;
+    --highlight-foreground: 0 0% 6%;
+
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 40 18% 94%;
+
+    --border: 40 18% 94%;
+    --input: 40 10% 30%;
+    --ring: 14 100% 58%;
+
+    --ink: 40 18% 94%;
+    --paper: 0 0% 6%;
+    --scribble: 40 18% 94%;
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 40 18% 94%;
+    --sidebar-primary: 40 18% 94%;
+    --sidebar-primary-foreground: 0 0% 6%;
+    --sidebar-accent: 14 100% 58%;
+    --sidebar-accent-foreground: 0 0% 6%;
+    --sidebar-border: 40 18% 94%;
+    --sidebar-ring: 14 100% 58%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+
+  html, body, #root {
+    @apply bg-background text-foreground;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  body {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+  }
+
+  ::selection {
+    background: hsl(var(--highlight));
+    color: hsl(var(--highlight-foreground));
+  }
+}
+
+@layer components {
+  .font-display { font-family: 'Archivo Black', 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+  .font-mono-px { font-family: 'JetBrains Mono', monospace; }
+  .font-marker { font-family: 'Permanent Marker', cursive; }
+
+  /* Newsprint grain */
+  .grain::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .dark .grain::before { mix-blend-mode: screen; opacity: 0.08; }
+
+  /* Spray highlight — quick swipe behind text */
+  .spray-highlight {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.25em;
+  }
+  .spray-highlight::before {
+    content: '';
+    position: absolute;
+    inset: 10% -4% 5% -4%;
+    background: hsl(var(--accent));
+    transform: skew(-6deg) rotate(-1deg);
+    z-index: -1;
+    filter: blur(0.4px);
+  }
+
+  .yellow-highlight::before { background: hsl(var(--highlight)); }
+
+  /* Hard brutalist shadow */
+  .shadow-brutal { box-shadow: 4px 4px 0 0 hsl(var(--ink)); }
+  .shadow-brutal-lg { box-shadow: 6px 6px 0 0 hsl(var(--ink)); }
+
+  /* Tape strip */
+  .tape {
+    position: absolute;
+    background: hsl(var(--highlight) / 0.7);
+    width: 80px;
+    height: 22px;
+    transform: rotate(-4deg);
+    box-shadow: 0 1px 2px hsl(0 0% 0% / 0.15);
+  }
+
+  /* Marquee */
+  .marquee-track {
+    display: flex;
+    gap: 2rem;
+    animation: marquee 28s linear infinite;
+    width: max-content;
+  }
+
+  /* Robot reactions */
+  .robot-bob { animation: bob 3s ease-in-out infinite; }
+  .robot-shake { animation: shake 0.4s ease-in-out infinite; }
+}
+
+@layer utilities {
+  .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 1rem); }
+  .safe-top { padding-top: max(env(safe-area-inset-top), 0.5rem); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-6px) rotate(1deg); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-2px) rotate(-2deg); }
+  75% { transform: translateX(2px) rotate(2deg); }
+}
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+@keyframes scribble-in {
+  from { stroke-dashoffset: 1000; opacity: 0; }
+  to   { stroke-dashoffset: 0; opacity: 1; }
+}
+.scribble-draw path, .scribble-draw line, .scribble-draw circle {
+  stroke-dasharray: 1000;
+  animation: scribble-in 2.4s ease-out forwards;
+}
